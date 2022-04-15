@@ -1,12 +1,12 @@
 Feature: User Creation
 
   Background:
-    When I go to "https://viktor-silakov.github.io/course-sut/"
-    When I login as: "User", "Password"
+    Given I go to "https://viktor-silakov.github.io/course-sut/"
+    And I login as: "walker@jw.com", "password"
 
   Scenario: Create user
     When I go to "Create User" menu item
-    When I fill form:
+    When I fill the form:
       """
       email: 'test@test.com'
       password: 'U&cmpYsxK9'
@@ -16,3 +16,4 @@ Feature: User Creation
       Zip: 222567
       Description: 'test user'
       """
+    Then I check created user in "List of users"
