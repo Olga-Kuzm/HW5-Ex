@@ -5,26 +5,11 @@ describe('The game', function () {
         await browser.pause(1000);
         await $('button=PLAY').click();
         await browser.waitUntil(async () => { 
-            const ballLocation = await $('#ball').getLocation('x');
-            const padLocation = await $('#pad').getLocation('x')  
-            
-            while(ballLocation > padLocation){                
-                await browser.keys('d')
-                const ballLocation = await $('#ball').getLocation('x');
-                const padLocation = await $('#pad').getLocation('x')
-                
-                if(ballLocation < padLocation){
-                    break
-                }
+            while(await $('#ball').getLocation('x') > await $('#pad').getLocation('x')){                
+                await browser.keys('d')                
             };
-            while(ballLocation < padLocation){                                
-                await browser.keys('a')
-                const ballLocation = await $('#ball').getLocation('x');
-                const padLocation = await $('#pad').getLocation('x') 
-                
-                if(ballLocation > padLocation){
-                    break
-                }
+            while(await $('#ball').getLocation('x') < await $('#pad').getLocation('x')){                                
+                await browser.keys('a') 
             }
             const points = parseInt(await $('#points').getText(), 10);
             if (points > 100) return true
